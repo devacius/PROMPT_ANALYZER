@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from tokenizer import count_tokens
+from token_utils import count_tokens_with_overflow
 
 app = FastAPI()
 
@@ -22,4 +22,4 @@ def Welcome_message():
 
 @app.post("/api/tokenize")
 def tokenize_prompt(data: PromptInput):
-    return count_tokens(data.prompt, data.model)
+    return count_tokens_with_overflow(data.prompt, data.model)
